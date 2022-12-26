@@ -41,10 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.postgres', # new
+    'django.contrib.postgres', 
     'django.contrib.staticfiles',
-    'rest_framework', # new
-    'trips', # new
+    'rest_framework', 
+    'trips', 
 ]
 
 MIDDLEWARE = [
@@ -91,7 +91,7 @@ DATABASES = {
         'PORT': os.getenv('PGPORT', '5432'),
     }
 }
-AUTH_USER_MODEL = 'trips.User' # new
+AUTH_USER_MODEL = 'trips.User' 
 
 
 REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379')

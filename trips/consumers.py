@@ -6,13 +6,13 @@ from trips.models import Trip
 class TaxiConsumer(AsyncJsonWebsocketConsumer):
     groups = ['test']
 
-    # new
+    
     @database_sync_to_async
     def _create_trip(self, data):
         serializer = TripSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         return serializer.create(serializer.validated_data)
-    # new
+    
     @database_sync_to_async
     def _get_trip_data(self, trip):
         return NestedTripSerializer(trip).data
@@ -39,14 +39,14 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
         if user.is_anonymous:
             await self.close()
         else:
-            user_group = await self._get_user_group(user) # new
+            user_group = await self._get_user_group(user) 
             if user_group == 'driver':
                 await self.channel_layer.group_add(
                     group='drivers',
                     channel=self.channel_name
                 )
             
-            # new
+            
             for trip_id in await self._get_trip_ids(user):
                 await self.channel_layer.group_add(
                     group=trip_id,
@@ -66,8 +66,8 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
         })
 
     async def disconnect(self, code):
-        user = self.scope['user'] # new
-        # new
+        user = self.scope['user'] 
+        
         if user.is_anonymous:
             await self.close()
         else:
@@ -78,7 +78,7 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
                     channel=self.channel_name
                 )
 
-            # new
+            
             for trip_id in await self._get_trip_ids(user):
                 await self.channel_layer.group_discard(
                     group=trip_id,
@@ -125,7 +125,7 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
         })
 
         # Add rider to trip group.
-        await self.channel_layer.group_add( # new
+        await self.channel_layer.group_add( 
             group=f'{trip.id}',
             channel=self.channel_name
         )

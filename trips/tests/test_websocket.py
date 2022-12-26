@@ -17,7 +17,7 @@ TEST_CHANNEL_LAYERS = {
 
 
 @database_sync_to_async
-def create_user(  # changed
+def create_user(  
     username,
     password,
     group='rider'
@@ -29,7 +29,7 @@ def create_user(  # changed
     )
 
     # Create user group.
-    user_group, _ = Group.objects.get_or_create(name=group)  # new
+    user_group, _ = Group.objects.get_or_create(name=group)  
     user.groups.add(user_group)
     user.save()
 
@@ -270,3 +270,4 @@ class TestWebSocket:
         assert response == message
 
         await communicator.disconnect()
+    
