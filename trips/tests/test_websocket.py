@@ -5,6 +5,7 @@ from channels.testing import WebsocketCommunicator
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.tokens import AccessToken
 from django.contrib.auth.models import Group
+from trips.models import Trip
 
 from taxi.asgi import application
 
@@ -36,6 +37,22 @@ def create_user(  # changed
     access = AccessToken.for_user(user)
 
     return user, access
+
+@database_sync_to_async
+def create_trip(
+    pick_up_address='123 Main Street',
+    drop_off_address='456 Piney Road',
+    status='REQUESTED',
+    rider=None,
+    driver=None
+):
+    return Trip.objects.create(
+        pick_up_address=pick_up_address,
+        drop_off_address=drop_off_address,
+        status=status,
+        rider=rider,
+        driver=driver
+    )
 
 
 
@@ -221,6 +238,32 @@ class TestWebSocket:
         }
         channel_layer = get_channel_layer()
         await channel_layer.group_send(response_data['id'], message=message)
+
+        # Rider receives message.
+        response = await communicator.receive_json_from()
+        assert response == message
+
+        await communicator.disconnect()
+    
+    async def test_join_trip_group_on_connect(self, settings):
+        settings.CHANNEL_LAYERS = TEST_CHANNEL_LAYERS
+        user, access = await create_user(
+            'test.user@example.com', 'pAssw0rd', 'rider'
+        )
+        trip = await create_trip(rider=user)
+        communicator = WebsocketCommunicator(
+            application=application,
+            path=f'/taxi/?token={access}'
+        )
+        connected, _ = await communicator.connect()
+
+        # Send a message to the trip group.
+        message = {
+            'type': 'echo.message',
+            'data': 'This is a test message.',
+        }
+        channel_layer = get_channel_layer()
+        await channel_layer.group_send(f'{trip.id}', message=message)
 
         # Rider receives message.
         response = await communicator.receive_json_from()
