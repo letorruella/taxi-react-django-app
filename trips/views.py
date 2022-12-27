@@ -19,7 +19,7 @@ class TripView(viewsets.ReadOnlyModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = TripSerializer
 
-    def get_queryset(self): # new
+    def get_queryset(self): 
         user = self.request.user
         if user.group == 'driver':
             return Trip.objects.filter(

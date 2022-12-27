@@ -34,7 +34,7 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
             ).only('id').values_list('id', flat=True)
         return map(str, trip_ids)
     
-    # new
+    
     @database_sync_to_async
     def _update_trip(self, data):
         instance = Trip.objects.get(id=data.get('id'))
@@ -104,7 +104,7 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
             await self.create_trip(content)
         elif message_type == 'echo.message':
             await self.echo_message(content)
-        elif message_type == 'update.trip': # new
+        elif message_type == 'update.trip': 
             await self.update_trip(content)
 
     async def update_trip(self, message):

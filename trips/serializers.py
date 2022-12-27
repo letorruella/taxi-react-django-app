@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Passwords must match.')
         return data
 
-    def create(self, validated_data): # changed
+    def create(self, validated_data): 
         group_data = validated_data.pop('group')
         group, _ = Group.objects.get_or_create(name=group_data)
         data = {
