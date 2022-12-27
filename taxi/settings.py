@@ -75,6 +75,8 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'taxi.wsgi.application'
 
 
@@ -157,3 +159,8 @@ ASGI_APPLICATION = 'taxi.asgi.application'
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = Path(BASE_DIR / 'media')

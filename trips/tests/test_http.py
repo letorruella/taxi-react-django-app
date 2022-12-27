@@ -9,8 +9,13 @@ from rest_framework.test import APITestCase
 
 from django.contrib.auth.models import Group
 from trips.models import Trip
+from io import BytesIO
+
+from django.core.files.uploadedfile import SimpleUploadedFile
+from PIL import Image
 
 PASSWORD = 'pAssw0rd!'
+
 
 
 def create_user(username='user@example.com', password=PASSWORD, group_name='rider'): 
@@ -21,19 +26,26 @@ def create_user(username='user@example.com', password=PASSWORD, group_name='ride
     user.save()
     return user
 
+def create_photo_file():
+    data = BytesIO()
+    Image.new('RGB', (100, 100)).save(data, 'PNG')
+    data.seek(0)
+    return SimpleUploadedFile('photo.png', data.getvalue())
 
 
 
 class AuthenticationTest(APITestCase):
     # Function collapsed for clarity.
     def test_user_can_sign_up(self): 
+        photo_file = create_photo_file() # new
         response = self.client.post(reverse('sign_up'), data={
         'username': 'user@example.com',
         'first_name': 'Test',
         'last_name': 'User',
         'password1': PASSWORD,
         'password2': PASSWORD,
-        'group': 'rider', 
+        'group': 'rider',
+        'photo': photo_file, # new
         })
         user = get_user_model().objects.last()
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
@@ -42,6 +54,7 @@ class AuthenticationTest(APITestCase):
         self.assertEqual(response.data['first_name'], user.first_name)
         self.assertEqual(response.data['last_name'], user.last_name)
         self.assertEqual(response.data['group'], user.group) 
+        self.assertIsNotNone(user.photo) # new
         
     def test_user_can_log_in(self): 
         user = create_user()
