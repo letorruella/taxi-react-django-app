@@ -6,6 +6,8 @@ function LogIn (props) {
     <>
       <Link to='/'>Home</Link>
       <h1>Log in</h1>
+      <Link to='/log-in'>Log in</Link>
+
       <p>
         Don't have an account? <Link to='/sign-up'>Sign up!</Link>
       </p>
