@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import {createRoot} from 'react-dom/client';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import './index.css';
 import App from './App';
@@ -8,7 +8,9 @@ import Landing from './components/Landing';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 
-ReactDOM.render(
+createRoot(
+  document.getElementById('root')
+).render(
   <React.StrictMode>
     <HashRouter>
       <Routes>
@@ -20,9 +22,9 @@ ReactDOM.render(
         {/* new end */}
       </Routes>
     </HashRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  </React.StrictMode>
+)
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

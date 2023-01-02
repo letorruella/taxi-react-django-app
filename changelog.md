@@ -5,9 +5,10 @@ Changes
 
 ### Added
 
-- Created a client `create react-app client`.
+- Created a client `create react-app client`
+- Installe react route `react-router-dom@6.4.3` 
 
 ### Changed
 
-- Installed react and react router.
+- Setup Basic Routes
 
