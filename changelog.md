@@ -9,5 +9,5 @@ Changes
 
 ### Changed
 
-- Improve argument against commit logs.
+- Installed react and react router.
 
