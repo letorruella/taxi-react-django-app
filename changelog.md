@@ -9,7 +9,13 @@ Changes
 - Created a client `create react-app client`
 - Install react route `react-router-dom@6.4.3`
 - Installed `cypress@10.11.0`
+- Installed ```bootstrap@5.2.2 \
+           react-bootstrap@2.5.0 \
+           react-router-bootstrap@0.26.2 \
+           bootswatch@5.2.2```
+-
 
 ### Changed
 
 - Setup Basic Routes
+- Setup React Boostrap and Boostrap Forms
