@@ -1,7 +1,7 @@
 # Change Log
 Changes
 
-## [0.0.8] - 2015-02-17
+## [0.0.8] - 2023-01-02
 
 ### Added
 
@@ -10,4 +10,4 @@ Changes
 ### Changed
 
 - Improve argument against commit logs.
-- Start following [SemVer](https://semver.org) properly.
+
