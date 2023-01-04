@@ -2,6 +2,19 @@
 
 Changes
 
+
+## [0.0.8] - 2023-01-03
+
+### Added
+
+- all installation can be see on changes
+
+### Changed
+
+- Added docker, postgres, redis and docker compose
+- App now is dockerized
+
+
 ## [0.0.8] - 2023-01-02
 
 ### Added
@@ -14,7 +27,7 @@ Changes
            react-router-bootstrap@0.26.2 \
            bootswatch@5.2.2```
 - Installed `cypress-file-upload@5.0.8`
-- Installed ` axios@1.1.3`
+- Installed `axios@1.1.3`
 
 ### Changed
 
