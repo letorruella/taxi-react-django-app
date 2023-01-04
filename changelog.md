@@ -13,7 +13,8 @@ Changes
            react-bootstrap@2.5.0 \
            react-router-bootstrap@0.26.2 \
            bootswatch@5.2.2```
--
+- Installed `cypress-file-upload@5.0.8`
+- Installed ` axios@1.1.3`
 
 ### Changed
 

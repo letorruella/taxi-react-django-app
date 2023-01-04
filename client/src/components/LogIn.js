@@ -5,10 +5,18 @@ import { Breadcrumb, Button, Card, Form } from "react-bootstrap";
 
 function LogIn(props) {
   const [isSubmitted, setSubmitted] = useState(false);
-  const onSubmit = (values, actions) => setSubmitted(true);
+  const onSubmit = async (values, actions) => {
+    try {
+      await props.logIn(values.username, values.password);
+      setSubmitted(true);
+    }
+    catch (error) {
+      console.error(error);
+    }
+  };
 
-  if (isSubmitted) {
-    return <Navigate to="/" />;
+  if (props.isLoggedIn || isSubmitted) {
+    return <Navigate to='/' />;
   }
   return (
     <>

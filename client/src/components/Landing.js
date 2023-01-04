@@ -6,14 +6,14 @@ function Landing (props) {
   return (
     <div className='middle-center'>
       <h1 className='landing logo'>Taxi</h1>
-      <ButtonGroup>
+      {props.isLoggedIn ? (<></>):(<ButtonGroup>
         <LinkContainer to='/sign-up'>
           <Button data-cy="signUp">Sign up</Button>
         </LinkContainer>
         <LinkContainer to='/log-in'>
           <Button data-cy="logIn">Log in</Button>
         </LinkContainer>
-      </ButtonGroup>
+      </ButtonGroup>)}
     </div>
   );
 }

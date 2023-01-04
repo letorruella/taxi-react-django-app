@@ -10,6 +10,9 @@ function SignUp(props) {
   if (isSubmitted) {
     return <Navigate to='/log-in' />;
   }
+  if (props.isLoggedIn) {
+    return <Navigate to='/' />;
+  }
   return (
     <>
       <Breadcrumb>

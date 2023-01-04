@@ -2,27 +2,20 @@ import 'bootswatch/dist/lumen/bootstrap.css';
 
 import React from 'react';
 import {createRoot} from 'react-dom/client';
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Landing from './components/Landing';
-import LogIn from './components/LogIn';
-import SignUp from './components/SignUp';
+import axios from 'axios'; 
+axios.defaults.xsrfCookieName = 'csrftoken'; 
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'; 
 
 createRoot(
   document.getElementById('root')
 ).render(
   <React.StrictMode>
     <HashRouter>
-      <Routes>
-        <Route path='/' element={<App />} />
-        {/* new begin */}
-        <Route index element={<Landing />} />
-        <Route path='sign-up' element={<SignUp />} />
-        <Route path='log-in' element={<LogIn />} />
-        {/* new end */}
-      </Routes>
+     <App/>
     </HashRouter>
   </React.StrictMode>
 )
